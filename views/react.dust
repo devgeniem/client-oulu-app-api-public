@@ -1,0 +1,13 @@
+{> "./layout" /}
+
+{<content}
+  <link rel="stylesheet" href="/styles/reactapp.bundle.css?version={versionNumber}" />
+  <!-- REACT -->
+  <script>
+    window.PRELOADED_STATE = {state|s};
+  </script>
+
+  <div id="app">{reactHtml|s}</div>
+  <script type="text/javascript" src="/js/reactapp.bundle.js?version={versionNumber}"></script>
+  <!-- REACT END -->
+{/content}

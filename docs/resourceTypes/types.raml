@@ -1,0 +1,512 @@
+#%RAML 1.0
+title: Types
+types:
+  Event:
+    type: object
+    displayName: Event model
+    properties:
+      id: integer
+      createdAt: integer
+      updatedAt: integer
+      creator?: integer
+      modifier?: integer
+      title: string
+      status:
+        type: string
+        enum: ['pending', 'published', 'removed']
+      content_type:
+        type: string
+        enum: ['event', 'announcements']
+      desc: string
+      price: string
+      organiser: string
+      picture: string
+      cat: string
+      startDate: integer
+      endDate: integer
+      place: string
+      lat: number
+      long: number
+      participants?: array
+      polls?: array
+      amiparticipating: boolean
+      participantCount: number
+      anonparticipants?: array
+    example:
+      {
+        "participants": [],
+        "polls": [],
+        "anonparticipants": [],
+        "createdAt": 1509548758543,
+        "updatedAt": 1510318162617,
+        "id": 6,
+        "title": "Antti Tuiskun konsertti",
+        "status": "pending",
+        "content_type": "event",
+        "desc": "Anatude kiertue.",
+        "price": "22",
+        "organiser": "Laurin oy",
+        "picture": "",
+        "cat": "musiikki",
+        "startDate": 1510430400000,
+        "endDate": 1510434000000,
+        "place": "Ratakatu 1, Oulu, Suomi",
+        "lat": 65.0102315,
+        "long": 25.4861322,
+        "creator": null,
+        "modifier": 1,
+        amiparticipating: true,
+        "participantCount": 2
+      }
+  EventList:
+    type: array
+    items: Event
+    displayName: Array of events
+    example:
+      [
+          {
+              "participants": [],
+              "polls": [],
+              "anonparticipants": [],
+              "createdAt": 1509365222450,
+              "updatedAt": 1509365222450,
+              "id": 1,
+              "title": "automyynti",
+              "status": "removed",
+              "content_type": "event",
+              "desc": "makkaraa",
+              "price": "",
+              "organiser": "",
+              "picture": "",
+              "cat": "Aikuiset",
+              "startDate": 1510704000000,
+              "endDate": 1510790400000,
+              "place": "",
+              "lat": 0,
+              "long": 0,
+              "creator": 6,
+              "modifier": null,
+              amiparticipating: true,
+              participantCount: 2
+          },
+          {
+              "participants": [],
+              "polls": [],
+              "anonparticipants": [],
+              "createdAt": 1509367025529,
+              "updatedAt": 1509534242614,
+              "id": 2,
+              "title": "wuuu",
+              "status": "published",
+              "content_type": "event",
+              "desc": "nakki",
+              "price": "",
+              "organiser": "",
+              "picture": "",
+              "cat": "Aikuiset",
+              "startDate": 1510704000000,
+              "endDate": 1510790400000,
+              "place": "",
+              "lat": 0,
+              "long": 0,
+              "creator": 6,
+              "modifier": null,
+              amiparticipating: true,
+              participantCount: 2
+          }
+      ]
+  UserList:
+    type: array
+    items: User
+    displayName: Array of users
+
+  User:
+    type: object
+    displayName: User model
+    properties:
+      createdAt: number
+      updatedAt: number
+      id: number
+      username: string
+      password?: string
+      email: string
+      userlevel:
+        type: number
+        enum: [0, 1, 2, 3]
+      active: boolean
+      participations: array
+      events: array
+      gender?:
+        type: string
+        enum: ['male', 'female']
+      YOB?: integer
+      deviceid?: string
+      allowNotifications?: boolean
+    example:
+      {
+      "events": [
+              {
+                  "createdAt": 1510652227136,
+                  "updatedAt": 1510652227136,
+                  "id": 23,
+                  "title": "laurin testi",
+                  "status": "published",
+                  "content_type": "event",
+                  "desc": "12321",
+                  "price": "444",
+                  "organiser": "Laurin oy",
+                  "picture": "https://oulu-app-stage.s3-eu-west-1.amazonaws.com/images/d8b48fd6-24ac-4352-92b8-d30c933d31a3.jpeg",
+                  "cat": "musiikki",
+                  "startDate": 1510822800000,
+                  "endDate": 1510995000000,
+                  "place": "Tampereen Rautatieasema, Rautatienkatu, Tampere, Suomi",
+                  "lat": 61.4984336,
+                  "long": 23.773009,
+                  "creator": 1,
+                  "modifier": null
+              }
+          ],
+          "participations": [
+        {
+            "createdAt": 1509367025529,
+            "updatedAt": 1509534242614,
+            "id": 2,
+            "title": "wuuu",
+            "status": "published",
+            "content_type": "event",
+            "desc": "nakki",
+            "price": "",
+            "organiser": "",
+            "picture": "",
+            "cat": "Aikuiset",
+            "startDate": 1510704000000,
+            "endDate": 1510790400000,
+            "place": "",
+            "lat": 0,
+            "long": 0,
+            "creator": 6,
+            "modifier": null
+        },
+        {
+            "createdAt": 1509538354473,
+            "updatedAt": 1509538354473,
+            "id": 3,
+            "title": "lapset",
+            "status": "published",
+            "content_type": "event",
+            "desc": "makkaraa",
+            "price": "",
+            "organiser": "",
+            "picture": "",
+            "cat": "Lapset",
+            "startDate": 1510704000000,
+            "endDate": 1510790400000,
+            "place": "",
+            "lat": 0,
+            "long": 0,
+            "creator": 6,
+            "modifier": null
+        }
+    ],
+        "createdAt": 1508239367342,
+        "updatedAt": 1508239367342,
+        "id": 1,
+        "username": "admin",
+        "email": "xx@abcd.com",
+        "userlevel": 3,
+        "active": true
+      }
+  AnonUser:
+    type: object
+    displayName: Anonymous user object
+    properties:
+      createdAt: number
+      updatedAt: number
+      id: number
+      username: string
+      userlevel: number
+      active: boolean
+    example:
+      {
+        "createdAt": 1508494059833,
+        "updatedAt": 1508494059833,
+        "id": 4,
+        "username": "fdaffa",
+        "userlevel": 0,
+        "active": true
+      }
+  NewUser:
+    type: object
+    displayName: New User object
+    properties:
+      username: string
+      password: string
+      email: string
+      userlevel: number
+    example:
+      {
+       username: lauri,
+       password: salasana,
+       email: lauri@geniem.com,
+       userlevel: 3,
+      }
+  AuthUser:
+    type: object
+    displayName: Authenticated user
+    properties:
+      user: User
+      token: string
+    example:
+      {
+        user: {
+          "createdAt": 1508239367342,
+          "updatedAt": 1508239367342,
+          "id": 1,
+          "username": "admin",
+          "email": "xx@abcd.com",
+          "userlevel": 3,
+          "active": true,
+          "events": [],
+          participations: []
+
+        },
+        token: "ggnosn43nfgng"
+      }
+  GenericMessage:
+    type: object
+    displayName: Generic success message
+    properties:
+      message: string
+  ErrorMessage:
+    type: object
+    displayName: Generic error message
+    properties:
+      error: string
+      message: string
+  VoteList:
+    type: array
+    displayName: List of votepolls
+    items: Vote
+  Vote:
+    type: object
+    displayName: Votepoll
+    properties:
+      createdAt: number
+      updatedAt: number
+      id: number
+      title: string
+      organiser: string
+      link: string
+      image: string
+      active: boolean
+      pollType:
+        type: string
+        enum: ['poll', 'questionnaire']
+      linkedEvent: number
+      poll: array
+    example:
+      {
+        "createdAt": 1513170622311,
+        "updatedAt": 1513270411517,
+        "id": 1,
+        "title": "Laurin testiäänestys",
+        "organiser": "Geniem oy",
+        "link": "",
+        "image": "",
+        "active": true,
+        "pollType": "poll",
+        "linkedEvent": 3,
+        "poll": [
+            {
+                "type": "bool",
+                "id": "41ad2632-3e5e-442c-828a-65d90147632c",
+                "data": {
+                    "trueText": "Kyllä",
+                    "falseText": "Ei"
+                },
+                "title": "Onko jouluna lunta?"
+            }
+        ]
+      }
+  VoteResult:
+    type: object
+    displayName: Results for single vote
+    properties:
+      totalCount: number
+      title: string
+      questions: Questions
+    example:
+      {
+        "totalCount": 5,
+        "title": "ff",
+        "questions": [
+          {
+            "type": "bool",
+            "id": "6ad0ad88-45dc-42b6-8afd-074be24bc1f7",
+            "data": {
+                "trueText": "Kyllä",
+                "falseText": "Ei"
+            },
+            "title": "Onko huomenna pouta?",
+            "trueCount": 2,
+            "falseCount": 3
+          },
+          {
+            "type": "checkbox",
+            "id": "6362eba8-3fb6-4695-bb14-dd693abeac3e",
+            "data": {
+                "value1": "Kissa",
+                "value2": "Koira",
+                "value3": "",
+                "value4": "",
+                "value5": "",
+                "value6": ""
+            },
+            "title": "Lempi eläin",
+            "valueCounts": {
+                "value1": 1,
+                "value2": 4
+            }
+          }
+        ]
+      }
+  VoteFilled:
+    type: object
+    displayName: Single filled vote
+    properties:
+      createdAt: number
+      updatedAt: number
+      id: number
+      title: string
+      link: string
+      image: string
+      active: boolean
+      poll: QuestionsFilled
+    example:
+      {
+        "createdAt": 1513170622311,
+        "updatedAt": 1513270411517,
+        "id": 1,
+        "title": "Laurin testiäänestys",
+        "link": "",
+        "image": "",
+        "active": true,
+        "poll": [
+            {
+                "type": "bool",
+                "id": "41ad2632-3e5e-442c-828a-65d90147632c",
+                "data": {
+                    "trueText": "Kyllä",
+                    "falseText": "Ei"
+                },
+                "title": "Onko jouluna lunta?",
+                "value": true
+            }
+        ]
+      }
+  Questions:
+    type: array
+    items: Question
+
+  Question:
+    type: object
+    properties:
+      type: string
+      id: string
+      data: object
+      title: string
+      trueCount?: number
+      falseCount?: number
+      valueCounts?: object
+
+  QuestionsFilled:
+    type: array
+    items: QuestionFilled
+
+  QuestionFilled:
+    type: object
+    properties:
+      type: string
+      id: string
+      data: object
+      title: string
+      value: boolean
+  Ad:
+    type: object
+    properties:
+      createdAt: number
+      updatedAt: number
+      id: number
+      title: string
+      desc: string
+      picture: string
+      advertiser: string
+      publishDate: number
+      expireDate: number
+      showDates: boolean
+      link: string
+      cat: string
+      adtype:
+        type: string
+        enum: ['sponsored', 'announcement']
+        default: 'sponsored'
+      creator: number
+      modifier: number
+    example:
+      {
+        "createdAt": 1510925218393,
+        "updatedAt": 1515573585290,
+        "id": 1,
+        "title": "Osta hieno lambo.2",
+        "desc": "",
+        "picture": "https://oulu-app-stage.s3-eu-west-1.amazonaws.com/images/0451346e-d49a-4814-bd5a-44af5137207b.jpeg",
+        "advertiser": "Lauri",
+        "publishDate": 1511011560000,
+        "expireDate": 1512048360000,
+        "showDates": false,
+        "link": "",
+        "cat": "",
+        "adtype": "sponsored",
+        "creator": 1,
+        "modifier": 1
+      }
+  AdList:
+    type: array
+    items: Ad
+    example:
+      [
+      {
+        "createdAt": 1510925218393,
+        "updatedAt": 1515573585290,
+        "id": 1,
+        "title": "Osta hienot housut",
+        "desc": "",
+        "picture": "https://oulu-app-stage.s3-eu-west-1.amazonaws.com/images/0451346e-d49a-4814-bd5a-44af5137207b.jpeg",
+        "advertiser": "Lauri",
+        "publishDate": 1511011560000,
+        "expireDate": 1512048360000,
+        "showDates": false,
+        "link": "",
+        "cat": "",
+        "adtype": "sponsored",
+        "creator": 1,
+        "modifier": 1
+      },
+      {
+        "createdAt": 1510925218393,
+        "updatedAt": 1515573585290,
+        "id": 2,
+        "title": "Osta tämä paita",
+        "desc": "",
+        "picture": "https://oulu-app-stage.s3-eu-west-1.amazonaws.com/images/0451346e-d49a-4814-bd5a-44af5137207b.jpeg",
+        "advertiser": "Lauri",
+        "publishDate": 1511011560000,
+        "expireDate": 1512048360000,
+        "showDates": false,
+        "link": "",
+        "cat": "",
+        "adtype": "sponsored",
+        "creator": 1,
+        "modifier": 1
+      }
+      ]

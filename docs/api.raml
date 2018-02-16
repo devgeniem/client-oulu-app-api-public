@@ -1,0 +1,456 @@
+#%RAML 1.0
+title: oulu-app-api
+version: v1
+baseUri: http://localhost:1337/api
+
+traits:
+  requireToken: !include traits/token.raml
+
+uses:
+  Types: resourceTypes/types.raml
+
+
+/user:
+  description: Endpoints for interacting with users.
+  displayName: User endpoints
+  get:
+    is: [requireToken]
+    description: List all users
+    displayName: GET /user
+    responses:
+      200:
+        body:
+          application/json:
+            type: Types.UserList
+      400:
+
+  post:
+    is: [requireToken]
+    description: Add new user
+    body:
+      application/json:
+        type: Types.NewUser
+    responses:
+      200:
+        body:
+          application/json:
+            type: Types.User
+      400:
+        body:
+          application/json:
+            type: Types.ErrorMessage
+            example:
+              {
+              "error": "error_103",
+              "message": "Unable to create user."
+              }
+  /device:
+    post:
+      is:  [requireToken]
+      description: Activate user device
+      body:
+        application/json:
+          type: object
+          example:
+            {
+              "deviceid": "424234"
+            }
+      responses:
+        200:
+          body:
+            application/json:
+              type: object
+              example:
+                {
+                  "createdAt": 1512391106813,
+                  "updatedAt": 1512391141485,
+                  "id": 4,
+                  "deviceid": "424234",
+                  "active": true,
+                  "user": 1
+                }
+        400:
+
+    delete:
+      is:  [requireToken]
+      description: Deactivate user device
+      body:
+        application/json:
+          type: object
+          example:
+            {
+              "deviceid": "424234"
+            }
+
+  /{userid}:
+    uriParameters:
+      userid:
+        displayName: User id
+        description: User id
+    is:  [requireToken]
+    get:
+      description: Get single user information
+      responses:
+        200:
+          body:
+            application/json:
+              type: Types.User
+
+        400:
+          body:
+            application/json:
+              type: Types.ErrorMessage
+              examples:
+                error1: |
+                  {
+                    "error": "error_101",
+                    "message": "Unable to find user"
+                  }
+                error2:
+                  {
+                    "error": "error_102",
+                    "message": "Database error"
+                  }
+    post:
+      description: Update single user information
+      body:
+        application/json:
+          type: object
+          example:
+            {
+              username: "Lauri",
+              email: "lauri@geniem.com",
+              userlevel: 3
+            }
+      responses:
+        200:
+          body:
+            application/json:
+              type: Types.User
+        400:
+          body:
+            application/json:
+              type: Types.ErrorMessage
+
+    delete:
+      description: Remove single user
+      responses:
+        200:
+          body:
+            application/json:
+              type: object
+              example:
+                {
+                  "message": "User removed"
+                }
+
+/me:
+  displayName: User information endpoint
+  get:
+    description: Endpoint for fetching user information for provided token.
+    displayName: Fetch user information
+    is: [requireToken]
+    responses:
+      200:
+        body:
+          application/json:
+            type: Types.User
+  post:
+    description: Endpoint for updating user information for provided token
+    displayName: Update user information
+    body:
+      application/json:
+        type: object
+    is: [requireToken]
+    responses:
+      200:
+        body:
+          application/json:
+            type: Types.User
+/anonuser:
+  description: Endpoint for creating anonymous users.
+  displayName: Anonymous users endpoint
+
+  post:
+    description: Create new anonymous user with device id.
+    body:
+      application/json:
+        type: object
+        example:
+          {
+            "deviceid": "12313-xxx"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            type: Types.AnonUser
+      400:
+        body:
+          application/json:
+            type: Types.ErrorMessage
+
+/login:
+  description: Endpoint for logging in.
+  displayName: Login endpoint
+  post:
+    body:
+      application/json:
+        type: object
+        example:
+          {
+            "username": "lauri",
+            "password": "salasana"
+          }
+    responses:
+      200:
+        body:
+          application/json:
+            type: Types.AuthUser
+            description: Returns authenticated user with token.
+      400:
+        body:
+          application/json:
+            type: Types.ErrorMessage
+      401:
+        body:
+          application/json:
+            type: Types.ErrorMessage
+            example:
+              {
+                "error": "error_201",
+                "message": "Invalid credentials"
+              }
+
+/logout:
+  description: Endpoint for logging out.
+  displayName: Logout endpoint
+  get:
+    description: Log user out and destroy session information.
+    responses:
+      200:
+        body:
+          application/json:
+            type: Types.GenericMessage
+            example:
+              {
+                "message": "User logged out"
+              }
+      400:
+        body:
+          application/json:
+            type: Types.ErrorMessage
+            example:
+              {
+                "error": "error_203",
+                "message": "User not logged in"
+              }
+
+/event:
+  description: Event endpoints
+  displayName: Event endpoints
+  post:
+    description: Create new event
+    responses:
+      200:
+        body:
+          application/json:
+            type: Types.Event
+      400:
+        body:
+          application/json:
+            type: Types.ErrorMessage
+  get:
+    queryParameters:
+      page?:
+        type: integer
+        description: Page number
+        default: 1
+        example: 2
+      limit?:
+        type: integer
+        description: Items on one page
+        default: 10
+        example: 20
+      search?:
+        type: string
+        description: Search string
+        default: ''
+        example: 'luistelu'
+      categories?:
+        type: string
+        description: Search events by category
+        default: ''
+        example: 'Aikuiset'
+      subcategories:
+        type: string
+        description: Filter events by subcategories
+        example: ulkona, esteeton
+      from?:
+        type: integer
+      to?:
+        type: integer
+      status?:
+        type: string
+        default: published
+      listOld?:
+        type: boolean
+        default: false
+        description: List expired events.
+    responses:
+      200:
+        body:
+          application/json:
+            type: Types.EventList
+      400:
+        body:
+          application/json:
+            type: Types.ErrorMessage
+  /{id}:
+    get:
+      description: Get single event
+      responses:
+        200:
+          body:
+            application/json:
+              type: Types.Event
+    post:
+      description: Update single event information
+      responses:
+        200:
+          body:
+            application/json:
+              type: Types.Event
+    delete:
+      description: Mark event status as removed
+
+    /participate:
+      post:
+        description: Mark user as event participant.
+        responses:
+          200:
+            body:
+              application/json:
+                type: Types.Event
+          400:
+            body:
+              application/json:
+                type: Types.ErrorMessage
+      delete:
+        description: Unmark user as event participant.
+        responses:
+          200:
+            body:
+              application/json:
+                type: Types.Event
+          400:
+            body:
+              application/json:
+                type: Types.ErrorMessage
+/voting:
+  description: Endpoints for poll management
+  displayName: Vote endpoints
+  get:
+    queryParameters:
+      listAll?:
+        description: List all votes regardless of status
+        type: boolean
+    description: Get list of votes.
+    responses:
+      200:
+        body:
+          application/json:
+            type: Types.VoteList
+  post:
+    description: Create new votepoll
+    responses:
+      200:
+
+  /{id}:
+    uriParameters:
+      id:
+        description: Vote id
+        displayName: Vote id
+    get:
+      description: Get single vote object.
+      responses:
+        200:
+          body:
+            application/json:
+              type: Types.Vote
+    post:
+      description: Update single vote object
+      responses:
+        200:
+          body:
+            application/json:
+              type: Types.Vote
+
+/votingresult/{id}:
+  uriParameters:
+    id:
+      description: Vote id
+      displayName: Vote id
+
+  description: Endpoints for creating new filled poll and fetching results.
+  displayName: Vote result endpoints
+  get:
+    description: Get results for single poll
+    responses:
+      200:
+        body:
+          application/json:
+            type: Types.VoteResult
+  post:
+    description: Send filledpoll to backend.
+    body:
+      application/json:
+        type: Types.VoteFilled
+
+/ad:
+  description: Endpoints for ad management.
+  displayName: Vote endpoints
+  get:
+    description: Get list of ads
+    responses:
+      200:
+        body:
+          application/json:
+            type: Types.AdList
+
+  post:
+    description: Create new ad
+    body:
+      application/json:
+        type: Types.Ad
+    responses:
+      200:
+        body:
+          application/json:
+            type: Types.Ad
+
+  /{id}:
+    uriParameters:
+      id:
+        description: Ad id
+    get:
+      description: Get single ad
+      responses:
+        200:
+          body:
+            application/json:
+              type: Types.Ad
+    post:
+      description: Update ad information
+      body:
+        application/json:
+          type: object
+          example:
+            {
+            'title': 'uusi otsikko'
+            }
+      responses:
+        200:
+          body:
+            application/json:
+              type: Types.Ad

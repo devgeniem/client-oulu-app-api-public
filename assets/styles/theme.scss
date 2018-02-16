@@ -1,0 +1,271 @@
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  font-family: 'Source';
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'ExoSemiBold';
+  color: $purple;  
+}
+
+h1 {
+  font-size: 24px;
+  color: $purple;
+}
+
+h3 {
+  font-size: 20px;
+}
+
+.btn {
+  font-family: 'Source-SemiBold';
+  font-size: 18px;
+  width: 200px;
+}
+
+.btn-success {
+  background-color: $green;
+  border-color: $dark_green;
+}
+
+.btn-warning,
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active:hover {
+  color: $red;
+  border: 1px solid $red;
+  background-color: transparent;
+}
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+
+nav .container {
+  width: 100%;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 0;
+}
+
+.navbar-inverse {
+  background-color: #E5E5E5;
+}
+
+.navbar-brand {
+  font-family: 'Source-Black';
+  font-size: 24px;
+  color: $purple;
+}
+
+.navbar-inverse .navbar-brand {
+  color: $purple;
+}
+
+.navbar-inverse
+.navbar-brand:hover,
+.navbar-inverse .navbar-brand:focus {
+  color: $purple;
+}
+
+
+
+.navbar-inverse .navbar-text,
+.navbar-inverse .navbar-nav > li > a,
+.navbar-inverse .navbar-nav > li > a:hover {
+  color: $purple;
+  font-family: 'Source-SemiBold';
+  font-size: 14px;
+}
+
+.navbar-inverse .navbar-text {
+  border-right: 1px solid $purple;
+  padding-right: 20px;
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+
+.navbar-inverse .navbar-toggle {
+  background-color: $purple;
+}
+
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: $purple;
+    border-right: 1px solid #eee;
+  }
+  .topmenu {
+    display: none;
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+
+.nav-sidebar > li {
+  border-bottom: 1px solid $purple_border;
+}
+
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+  color: $white;
+  font-family: 'Exo';
+  font-size: 16px;
+}
+.nav-sidebar > li > a,
+.nav-sidebar > li > a:hover,
+.nav-sidebar > li > a:focus {
+    background-color: $purple;
+}
+
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
+/*
+* Forms
+*/
+
+label {
+  color: $dark;
+  font-size: 16px;
+  font-weight: normal;
+  padding-left: 15px;
+  font-family: 'Source';
+}
+
+.form-control {
+  background-color: $light_grey2;
+  border-color: $light_grey;
+  color: $black;
+  border-radius: 3px;
+  font-size: 16px;
+  font-family: 'Source';
+  height: 50px;  
+}
+
+.radio-control {
+  border: 1px solid $light_grey;
+  width: 50%;
+  padding: 10px;
+}
+
+/*
+ * Tables
+ */
+  .table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
+    text-align: center;
+    font-size: 18px;
+  }
+
+  .table-bordered > tbody > tr > td {
+    font-family: 'Source';
+    text-align: center;
+    font-size: 18px;
+    vertical-align: middle;
+  }
+
+  /*
+  * Pagination
+  */
+  .pagination > li > a {
+    font-size: 18px;
+    color: $dark;
+  }
+  
+  .pagination > .active > a,
+  .pagination > .active > a:focus {
+    color: $dark;
+    background-color: $light_grey;
+    border-color: $light_grey;
+  }
+  
+  .addForm {
+    border: 1px solid $light_grey;
+    margin-top: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 20px;
+  }
+
+  /*
+  * Geosuggest
+  */
+  .geosuggest__suggests--hidden {
+    display: none;
+  }
+
+  .geosuggest__suggests-wrapper ul{
+    background-color: white;
+    border: 1px solid $light_grey;    
+    list-style: none;
+    padding: 0;
+    position: absolute;
+    z-index: 200;
+    width: 90%;
+  }
+
+  .geosuggest__suggests-wrapper ul li{
+    margin-bottom: 5px;
+  }
+  
+  /*
+  * Vote-editor
+  */
+  .voteblock {
+    border: 1px solid black; 
+    margin: 10px;
+    padding-bottom: 10px;
+  }
+

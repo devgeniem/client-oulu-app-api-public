@@ -1,0 +1,955 @@
+<!DOCTYPE HTML><html><head><title>oulu-app-api API documentation</title><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="generator" content="https://github.com/raml2html/raml2html 6.4.0"><link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/styles/default.min.css"><script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script><script type="text/javascript" src="https://netdna.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.3.0/highlight.min.js"></script><script type="text/javascript">
+      $(document).ready(function() {
+        $('.page-header pre code, .top-resource-description pre code, .modal-body pre code').each(function(i, block) {
+          hljs.highlightBlock(block);
+        });
+
+        $('[data-toggle]').click(function() {
+          var selector = $(this).data('target') + ' pre code';
+          $(selector).each(function(i, block) {
+            hljs.highlightBlock(block);
+          });
+        });
+        $(window).bind('hashchange', function(e) {
+          var anchor_id = document.location.hash.substr(1);
+          var element = $('#' + anchor_id);
+          if (element.length && element.hasClass('modal')) {
+            element.modal('show');
+          }
+        });
+        $(window).trigger('hashchange');
+        $('.modal').on('hidden.bs.modal', function() {
+          try {
+            if (history && history.replaceState) {
+                history.replaceState({}, '', '#');
+            }
+          } catch(e) {}
+        });
+      });
+    </script><style>
+      .hljs {
+        background: transparent;
+      }
+      .parent {
+        color: #999;
+      }
+      .list-group-item > .badge {
+        float: none;
+        margin-right: 6px;
+      }
+      .panel-title > .methods {
+        float: right;
+      }
+      .badge {
+        border-radius: 0;
+        text-transform: uppercase;
+        width: 70px;
+        font-weight: normal;
+        color: #f3f3f6;
+        line-height: normal;
+      }
+      .badge_get {
+        background-color: #63a8e2;
+      }
+      .badge_post {
+        background-color: #6cbd7d;
+      }
+      .badge_put {
+        background-color: #22bac4;
+      }
+      .badge_delete {
+        background-color: #d26460;
+      }
+      .badge_patch {
+        background-color: #ccc444;
+      }
+      .list-group, .panel-group {
+        margin-bottom: 0;
+      }
+      .panel-group .panel+.panel-white {
+        margin-top: 0;
+      }
+      .panel-group .panel-white {
+        border-bottom: 1px solid #F5F5F5;
+        border-radius: 0;
+      }
+      .panel-white:last-child {
+        border-bottom-color: white;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+      .panel-white .panel-heading {
+        background: white;
+      }
+      .tab-pane ul {
+        padding-left: 2em;
+      }
+      .tab-pane h1 {
+        font-size: 1.3em;
+      }
+      .tab-pane h2 {
+        font-size: 1.2em;
+        padding-bottom: 4px;
+        border-bottom: 1px solid #ddd;
+      }
+      .tab-pane h3 {
+        font-size: 1.1em;
+      }
+      .tab-content {
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        padding: 10px;
+      }
+      #sidebar {
+        margin-top: 30px;
+        padding-right: 5px;
+        overflow: auto;
+        height: 90%;
+      }
+      .top-resource-description {
+        border-bottom: 1px solid #ddd;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description {
+        border-bottom: 1px solid #fcfcfc;
+        background: #fcfcfc;
+        padding: 15px 15px 0 15px;
+        margin: -15px -15px 10px -15px;
+      }
+      .resource-description p:last-child {
+        margin: 0;
+      }
+      .list-group .badge {
+        float: left;
+      }
+      .method_description {
+        margin-left: 85px;
+      }
+      .method_description p:last-child {
+        margin: 0;
+      }
+      .list-group-item {
+        cursor: pointer;
+      }
+      .list-group-item:hover {
+        background-color: #f5f5f5;
+      }
+      pre code {
+        overflow: auto;
+        word-wrap: normal;
+        white-space: pre;
+      }
+      .items {
+        background: #f5f5f5;
+        color: #333;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 9.5px;
+        margin: 0 0 10px;
+        font-size: 13px;
+        line-height: 1.42857143;
+      }
+      .examples {
+        margin-left: 0.5em;
+      }
+      .resource-modal li > ul {
+        margin-bottom: 1em;
+      }
+    </style></head><body data-spy="scroll" data-target="#sidebar"><div class="container"><div class="row"><div class="col-md-9" role="main"><div class="page-header"><h1>oulu-app-api API documentation <small>version v1</small></h1><p>http://localhost:1337/api</p></div><div class="panel panel-default"><div class="panel-heading"><h3 id="user" class="panel-title">User endpoints</h3></div><div class="panel-body"><div class="top-resource-description"><p>Endpoints for interacting with users.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user"><span class="parent"></span>/user</a> <span class="methods"><a href="#user_get"><span class="badge badge_get">get</span></a> <a href="#user_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_user" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>List all users</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#user_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Add new user</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/user</h4></div><div class="modal-body"><div class="alert alert-info"><p>List all users</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_get_request" data-toggle="tab">Request</a></li><li><a href="#user_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_get_request"><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em>required (string)</em><p>Requires authorization token</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Bearer {token}</code></pre></div></li></ul></div><div class="tab-pane" id="user_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: array of</p><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/user</h4></div><div class="modal-body"><div class="alert alert-info"><p>Add new user</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_post_request" data-toggle="tab">Request</a></li><li><a href="#user_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_post_request"><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em>required (string)</em><p>Requires authorization token</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Bearer {token}</code></pre></div></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>username</strong>: <em>required (string)</em></li><li><strong>password</strong>: <em>required (string)</em></li><li><strong>email</strong>: <em>required (string)</em></li><li><strong>userlevel</strong>: <em>required (number)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "username": "lauri",
+  "password": "salasana",
+  "email": "lauri@geniem.com",
+  "userlevel": 3
+}</code></pre></div></div><div class="tab-pane" id="user_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>deviceid</strong>: <em>(string)</em></li><li><strong>email</strong>: <em>required (string)</em></li><li><strong>updatedAt</strong>: <em>required (number)</em></li><li><strong>allowNotifications</strong>: <em>(boolean)</em></li><li><strong>password</strong>: <em>(string)</em></li><li><strong>events</strong>: <em>required (array of )</em></li><li><strong>participations</strong>: <em>required (array of )</em></li><li><strong>username</strong>: <em>required (string)</em></li><li><strong>createdAt</strong>: <em>required (number)</em></li><li><strong>active</strong>: <em>required (boolean)</em></li><li><strong>id</strong>: <em>required (number)</em></li><li><strong>gender</strong>: <em>(one of male, female)</em></li><li><strong>userlevel</strong>: <em>required (one of 0, 1, 2, 3)</em></li><li><strong>YOB</strong>: <em>(integer)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "events": [
+    {
+      "createdAt": 1510652227136,
+      "updatedAt": 1510652227136,
+      "id": 23,
+      "title": "laurin testi",
+      "status": "published",
+      "content_type": "event",
+      "desc": "12321",
+      "price": "444",
+      "organiser": "Laurin oy",
+      "picture": "https://oulu-app-stage.s3-eu-west-1.amazonaws.com/images/d8b48fd6-24ac-4352-92b8-d30c933d31a3.jpeg",
+      "cat": "musiikki",
+      "startDate": 1510822800000,
+      "endDate": 1510995000000,
+      "place": "Tampereen Rautatieasema, Rautatienkatu, Tampere, Suomi",
+      "lat": 61.4984336,
+      "long": 23.773009,
+      "creator": 1,
+      "modifier": null
+    }
+  ],
+  "participations": [
+    {
+      "createdAt": 1509367025529,
+      "updatedAt": 1509534242614,
+      "id": 2,
+      "title": "wuuu",
+      "status": "published",
+      "content_type": "event",
+      "desc": "nakki",
+      "price": "",
+      "organiser": "",
+      "picture": "",
+      "cat": "Aikuiset",
+      "startDate": 1510704000000,
+      "endDate": 1510790400000,
+      "place": "",
+      "lat": 0,
+      "long": 0,
+      "creator": 6,
+      "modifier": null
+    },
+    {
+      "createdAt": 1509538354473,
+      "updatedAt": 1509538354473,
+      "id": 3,
+      "title": "lapset",
+      "status": "published",
+      "content_type": "event",
+      "desc": "makkaraa",
+      "price": "",
+      "organiser": "",
+      "picture": "",
+      "cat": "Lapset",
+      "startDate": 1510704000000,
+      "endDate": 1510790400000,
+      "place": "",
+      "lat": 0,
+      "long": 0,
+      "creator": 6,
+      "modifier": null
+    }
+  ],
+  "createdAt": 1508239367342,
+  "updatedAt": 1508239367342,
+  "id": 1,
+  "username": "admin",
+  "email": "xx@abcd.com",
+  "userlevel": 3,
+  "active": true
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em>required (string)</em></li><li><strong>message</strong>: <em>required (string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "error": "error_103",
+  "message": "Unable to create user."
+}</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user_device"><span class="parent">/user</span>/device</a> <span class="methods"><a href="#user_device_post"><span class="badge badge_post">post</span></a> <a href="#user_device_delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_user_device" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user_device_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Activate user device</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#user_device_delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>Deactivate user device</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_device_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/device</h4></div><div class="modal-body"><div class="alert alert-info"><p>Activate user device</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_device_post_request" data-toggle="tab">Request</a></li><li><a href="#user_device_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_device_post_request"><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em>required (string)</em><p>Requires authorization token</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Bearer {token}</code></pre></div></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "deviceid": "424234"
+}</code></pre></div></div><div class="tab-pane" id="user_device_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "createdAt": 1512391106813,
+  "updatedAt": 1512391141485,
+  "id": 4,
+  "deviceid": "424234",
+  "active": true,
+  "user": 1
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="user_device_delete"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/user</span>/device</h4></div><div class="modal-body"><div class="alert alert-info"><p>Deactivate user device</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user_device_delete_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user_device_delete_request"><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em>required (string)</em><p>Requires authorization token</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Bearer {token}</code></pre></div></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "deviceid": "424234"
+}</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_user__userid_"><span class="parent">/user</span>/[userid]</a> <span class="methods"><a href="#user__userid__get"><span class="badge badge_get">get</span></a> <a href="#user__userid__post"><span class="badge badge_post">post</span></a> <a href="#user__userid__delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_user__userid_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#user__userid__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get single user information</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#user__userid__post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Update single user information</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#user__userid__delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>Remove single user</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="user__userid__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/user</span>/[userid]</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get single user information</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user__userid__get_request" data-toggle="tab">Request</a></li><li><a href="#user__userid__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user__userid__get_request"><h3>URI Parameters</h3><ul><li><strong>userid</strong>: <em>required (string)</em><p>User id</p></li></ul><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em>required (string)</em><p>Requires authorization token</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Bearer {token}</code></pre></div></li></ul></div><div class="tab-pane" id="user__userid__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>deviceid</strong>: <em>(string)</em></li><li><strong>email</strong>: <em>required (string)</em></li><li><strong>updatedAt</strong>: <em>required (number)</em></li><li><strong>allowNotifications</strong>: <em>(boolean)</em></li><li><strong>password</strong>: <em>(string)</em></li><li><strong>events</strong>: <em>required (array of )</em></li><li><strong>participations</strong>: <em>required (array of )</em></li><li><strong>username</strong>: <em>required (string)</em></li><li><strong>createdAt</strong>: <em>required (number)</em></li><li><strong>active</strong>: <em>required (boolean)</em></li><li><strong>id</strong>: <em>required (number)</em></li><li><strong>gender</strong>: <em>(one of male, female)</em></li><li><strong>userlevel</strong>: <em>required (one of 0, 1, 2, 3)</em></li><li><strong>YOB</strong>: <em>(integer)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "events": [
+    {
+      "createdAt": 1510652227136,
+      "updatedAt": 1510652227136,
+      "id": 23,
+      "title": "laurin testi",
+      "status": "published",
+      "content_type": "event",
+      "desc": "12321",
+      "price": "444",
+      "organiser": "Laurin oy",
+      "picture": "https://oulu-app-stage.s3-eu-west-1.amazonaws.com/images/d8b48fd6-24ac-4352-92b8-d30c933d31a3.jpeg",
+      "cat": "musiikki",
+      "startDate": 1510822800000,
+      "endDate": 1510995000000,
+      "place": "Tampereen Rautatieasema, Rautatienkatu, Tampere, Suomi",
+      "lat": 61.4984336,
+      "long": 23.773009,
+      "creator": 1,
+      "modifier": null
+    }
+  ],
+  "participations": [
+    {
+      "createdAt": 1509367025529,
+      "updatedAt": 1509534242614,
+      "id": 2,
+      "title": "wuuu",
+      "status": "published",
+      "content_type": "event",
+      "desc": "nakki",
+      "price": "",
+      "organiser": "",
+      "picture": "",
+      "cat": "Aikuiset",
+      "startDate": 1510704000000,
+      "endDate": 1510790400000,
+      "place": "",
+      "lat": 0,
+      "long": 0,
+      "creator": 6,
+      "modifier": null
+    },
+    {
+      "createdAt": 1509538354473,
+      "updatedAt": 1509538354473,
+      "id": 3,
+      "title": "lapset",
+      "status": "published",
+      "content_type": "event",
+      "desc": "makkaraa",
+      "price": "",
+      "organiser": "",
+      "picture": "",
+      "cat": "Lapset",
+      "startDate": 1510704000000,
+      "endDate": 1510790400000,
+      "place": "",
+      "lat": 0,
+      "long": 0,
+      "creator": 6,
+      "modifier": null
+    }
+  ],
+  "createdAt": 1508239367342,
+  "updatedAt": 1508239367342,
+  "id": 1,
+  "username": "admin",
+  "email": "xx@abcd.com",
+  "userlevel": 3,
+  "active": true
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em>required (string)</em></li><li><strong>message</strong>: <em>required (string)</em></li></ul><p><strong>Examples</strong>:</p><div class="examples"><p><strong>error1</strong>:<br></p><pre><code>{
+  "error": "error_101",
+  "message": "Unable to find user"
+}
+</code></pre><p><strong>error2</strong>:<br></p><pre><code>{
+  "error": "error_102",
+  "message": "Database error"
+}</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="user__userid__post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/user</span>/[userid]</h4></div><div class="modal-body"><div class="alert alert-info"><p>Update single user information</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user__userid__post_request" data-toggle="tab">Request</a></li><li><a href="#user__userid__post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user__userid__post_request"><h3>URI Parameters</h3><ul><li><strong>userid</strong>: <em>required (string)</em><p>User id</p></li></ul><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em>required (string)</em><p>Requires authorization token</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Bearer {token}</code></pre></div></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "username": "Lauri",
+  "email": "lauri@geniem.com",
+  "userlevel": 3
+}</code></pre></div></div><div class="tab-pane" id="user__userid__post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>deviceid</strong>: <em>(string)</em></li><li><strong>email</strong>: <em>required (string)</em></li><li><strong>updatedAt</strong>: <em>required (number)</em></li><li><strong>allowNotifications</strong>: <em>(boolean)</em></li><li><strong>password</strong>: <em>(string)</em></li><li><strong>events</strong>: <em>required (array of )</em></li><li><strong>participations</strong>: <em>required (array of )</em></li><li><strong>username</strong>: <em>required (string)</em></li><li><strong>createdAt</strong>: <em>required (number)</em></li><li><strong>active</strong>: <em>required (boolean)</em></li><li><strong>id</strong>: <em>required (number)</em></li><li><strong>gender</strong>: <em>(one of male, female)</em></li><li><strong>userlevel</strong>: <em>required (one of 0, 1, 2, 3)</em></li><li><strong>YOB</strong>: <em>(integer)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "events": [
+    {
+      "createdAt": 1510652227136,
+      "updatedAt": 1510652227136,
+      "id": 23,
+      "title": "laurin testi",
+      "status": "published",
+      "content_type": "event",
+      "desc": "12321",
+      "price": "444",
+      "organiser": "Laurin oy",
+      "picture": "https://oulu-app-stage.s3-eu-west-1.amazonaws.com/images/d8b48fd6-24ac-4352-92b8-d30c933d31a3.jpeg",
+      "cat": "musiikki",
+      "startDate": 1510822800000,
+      "endDate": 1510995000000,
+      "place": "Tampereen Rautatieasema, Rautatienkatu, Tampere, Suomi",
+      "lat": 61.4984336,
+      "long": 23.773009,
+      "creator": 1,
+      "modifier": null
+    }
+  ],
+  "participations": [
+    {
+      "createdAt": 1509367025529,
+      "updatedAt": 1509534242614,
+      "id": 2,
+      "title": "wuuu",
+      "status": "published",
+      "content_type": "event",
+      "desc": "nakki",
+      "price": "",
+      "organiser": "",
+      "picture": "",
+      "cat": "Aikuiset",
+      "startDate": 1510704000000,
+      "endDate": 1510790400000,
+      "place": "",
+      "lat": 0,
+      "long": 0,
+      "creator": 6,
+      "modifier": null
+    },
+    {
+      "createdAt": 1509538354473,
+      "updatedAt": 1509538354473,
+      "id": 3,
+      "title": "lapset",
+      "status": "published",
+      "content_type": "event",
+      "desc": "makkaraa",
+      "price": "",
+      "organiser": "",
+      "picture": "",
+      "cat": "Lapset",
+      "startDate": 1510704000000,
+      "endDate": 1510790400000,
+      "place": "",
+      "lat": 0,
+      "long": 0,
+      "creator": 6,
+      "modifier": null
+    }
+  ],
+  "createdAt": 1508239367342,
+  "updatedAt": 1508239367342,
+  "id": 1,
+  "username": "admin",
+  "email": "xx@abcd.com",
+  "userlevel": 3,
+  "active": true
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em>required (string)</em></li><li><strong>message</strong>: <em>required (string)</em></li></ul></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="user__userid__delete"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/user</span>/[userid]</h4></div><div class="modal-body"><div class="alert alert-info"><p>Remove single user</p></div><ul class="nav nav-tabs"><li class="active"><a href="#user__userid__delete_request" data-toggle="tab">Request</a></li><li><a href="#user__userid__delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="user__userid__delete_request"><h3>URI Parameters</h3><ul><li><strong>userid</strong>: <em>required (string)</em><p>User id</p></li></ul><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em>required (string)</em><p>Requires authorization token</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Bearer {token}</code></pre></div></li></ul></div><div class="tab-pane" id="user__userid__delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "message": "User removed"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="me" class="panel-title">User information endpoint</h3></div><div class="panel-body"><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_me"><span class="parent"></span>/me</a> <span class="methods"><a href="#me_get"><span class="badge badge_get">get</span></a> <a href="#me_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_me" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#me_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Endpoint for fetching user information for provided token.</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#me_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Endpoint for updating user information for provided token</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="me_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/me</h4></div><div class="modal-body"><div class="alert alert-info"><p>Endpoint for fetching user information for provided token.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#me_get_request" data-toggle="tab">Request</a></li><li><a href="#me_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="me_get_request"><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em>required (string)</em><p>Requires authorization token</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Bearer {token}</code></pre></div></li></ul></div><div class="tab-pane" id="me_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>deviceid</strong>: <em>(string)</em></li><li><strong>email</strong>: <em>required (string)</em></li><li><strong>updatedAt</strong>: <em>required (number)</em></li><li><strong>allowNotifications</strong>: <em>(boolean)</em></li><li><strong>password</strong>: <em>(string)</em></li><li><strong>events</strong>: <em>required (array of )</em></li><li><strong>participations</strong>: <em>required (array of )</em></li><li><strong>username</strong>: <em>required (string)</em></li><li><strong>createdAt</strong>: <em>required (number)</em></li><li><strong>active</strong>: <em>required (boolean)</em></li><li><strong>id</strong>: <em>required (number)</em></li><li><strong>gender</strong>: <em>(one of male, female)</em></li><li><strong>userlevel</strong>: <em>required (one of 0, 1, 2, 3)</em></li><li><strong>YOB</strong>: <em>(integer)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "events": [
+    {
+      "createdAt": 1510652227136,
+      "updatedAt": 1510652227136,
+      "id": 23,
+      "title": "laurin testi",
+      "status": "published",
+      "content_type": "event",
+      "desc": "12321",
+      "price": "444",
+      "organiser": "Laurin oy",
+      "picture": "https://oulu-app-stage.s3-eu-west-1.amazonaws.com/images/d8b48fd6-24ac-4352-92b8-d30c933d31a3.jpeg",
+      "cat": "musiikki",
+      "startDate": 1510822800000,
+      "endDate": 1510995000000,
+      "place": "Tampereen Rautatieasema, Rautatienkatu, Tampere, Suomi",
+      "lat": 61.4984336,
+      "long": 23.773009,
+      "creator": 1,
+      "modifier": null
+    }
+  ],
+  "participations": [
+    {
+      "createdAt": 1509367025529,
+      "updatedAt": 1509534242614,
+      "id": 2,
+      "title": "wuuu",
+      "status": "published",
+      "content_type": "event",
+      "desc": "nakki",
+      "price": "",
+      "organiser": "",
+      "picture": "",
+      "cat": "Aikuiset",
+      "startDate": 1510704000000,
+      "endDate": 1510790400000,
+      "place": "",
+      "lat": 0,
+      "long": 0,
+      "creator": 6,
+      "modifier": null
+    },
+    {
+      "createdAt": 1509538354473,
+      "updatedAt": 1509538354473,
+      "id": 3,
+      "title": "lapset",
+      "status": "published",
+      "content_type": "event",
+      "desc": "makkaraa",
+      "price": "",
+      "organiser": "",
+      "picture": "",
+      "cat": "Lapset",
+      "startDate": 1510704000000,
+      "endDate": 1510790400000,
+      "place": "",
+      "lat": 0,
+      "long": 0,
+      "creator": 6,
+      "modifier": null
+    }
+  ],
+  "createdAt": 1508239367342,
+  "updatedAt": 1508239367342,
+  "id": 1,
+  "username": "admin",
+  "email": "xx@abcd.com",
+  "userlevel": 3,
+  "active": true
+}</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="me_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/me</h4></div><div class="modal-body"><div class="alert alert-info"><p>Endpoint for updating user information for provided token</p></div><ul class="nav nav-tabs"><li class="active"><a href="#me_post_request" data-toggle="tab">Request</a></li><li><a href="#me_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="me_post_request"><h3>Headers</h3><ul><li><strong>Authorization</strong>: <em>required (string)</em><p>Requires authorization token</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Bearer {token}</code></pre></div></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p></div><div class="tab-pane" id="me_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>deviceid</strong>: <em>(string)</em></li><li><strong>email</strong>: <em>required (string)</em></li><li><strong>updatedAt</strong>: <em>required (number)</em></li><li><strong>allowNotifications</strong>: <em>(boolean)</em></li><li><strong>password</strong>: <em>(string)</em></li><li><strong>events</strong>: <em>required (array of )</em></li><li><strong>participations</strong>: <em>required (array of )</em></li><li><strong>username</strong>: <em>required (string)</em></li><li><strong>createdAt</strong>: <em>required (number)</em></li><li><strong>active</strong>: <em>required (boolean)</em></li><li><strong>id</strong>: <em>required (number)</em></li><li><strong>gender</strong>: <em>(one of male, female)</em></li><li><strong>userlevel</strong>: <em>required (one of 0, 1, 2, 3)</em></li><li><strong>YOB</strong>: <em>(integer)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "events": [
+    {
+      "createdAt": 1510652227136,
+      "updatedAt": 1510652227136,
+      "id": 23,
+      "title": "laurin testi",
+      "status": "published",
+      "content_type": "event",
+      "desc": "12321",
+      "price": "444",
+      "organiser": "Laurin oy",
+      "picture": "https://oulu-app-stage.s3-eu-west-1.amazonaws.com/images/d8b48fd6-24ac-4352-92b8-d30c933d31a3.jpeg",
+      "cat": "musiikki",
+      "startDate": 1510822800000,
+      "endDate": 1510995000000,
+      "place": "Tampereen Rautatieasema, Rautatienkatu, Tampere, Suomi",
+      "lat": 61.4984336,
+      "long": 23.773009,
+      "creator": 1,
+      "modifier": null
+    }
+  ],
+  "participations": [
+    {
+      "createdAt": 1509367025529,
+      "updatedAt": 1509534242614,
+      "id": 2,
+      "title": "wuuu",
+      "status": "published",
+      "content_type": "event",
+      "desc": "nakki",
+      "price": "",
+      "organiser": "",
+      "picture": "",
+      "cat": "Aikuiset",
+      "startDate": 1510704000000,
+      "endDate": 1510790400000,
+      "place": "",
+      "lat": 0,
+      "long": 0,
+      "creator": 6,
+      "modifier": null
+    },
+    {
+      "createdAt": 1509538354473,
+      "updatedAt": 1509538354473,
+      "id": 3,
+      "title": "lapset",
+      "status": "published",
+      "content_type": "event",
+      "desc": "makkaraa",
+      "price": "",
+      "organiser": "",
+      "picture": "",
+      "cat": "Lapset",
+      "startDate": 1510704000000,
+      "endDate": 1510790400000,
+      "place": "",
+      "lat": 0,
+      "long": 0,
+      "creator": 6,
+      "modifier": null
+    }
+  ],
+  "createdAt": 1508239367342,
+  "updatedAt": 1508239367342,
+  "id": 1,
+  "username": "admin",
+  "email": "xx@abcd.com",
+  "userlevel": 3,
+  "active": true
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="anonuser" class="panel-title">Anonymous users endpoint</h3></div><div class="panel-body"><div class="top-resource-description"><p>Endpoint for creating anonymous users.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_anonuser"><span class="parent"></span>/anonuser</a> <span class="methods"><a href="#anonuser_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_anonuser" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#anonuser_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create new anonymous user with device id.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="anonuser_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/anonuser</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create new anonymous user with device id.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#anonuser_post_request" data-toggle="tab">Request</a></li><li><a href="#anonuser_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="anonuser_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "deviceid": "12313-xxx"
+}</code></pre></div></div><div class="tab-pane" id="anonuser_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>createdAt</strong>: <em>required (number)</em></li><li><strong>updatedAt</strong>: <em>required (number)</em></li><li><strong>id</strong>: <em>required (number)</em></li><li><strong>username</strong>: <em>required (string)</em></li><li><strong>userlevel</strong>: <em>required (number)</em></li><li><strong>active</strong>: <em>required (boolean)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "createdAt": 1508494059833,
+  "updatedAt": 1508494059833,
+  "id": 4,
+  "username": "fdaffa",
+  "userlevel": 0,
+  "active": true
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em>required (string)</em></li><li><strong>message</strong>: <em>required (string)</em></li></ul></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="login" class="panel-title">Login endpoint</h3></div><div class="panel-body"><div class="top-resource-description"><p>Endpoint for logging in.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_login"><span class="parent"></span>/login</a> <span class="methods"><a href="#login_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_login" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#login_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="login_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/login</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#login_post_request" data-toggle="tab">Request</a></li><li><a href="#login_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="login_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "username": "lauri",
+  "password": "salasana"
+}</code></pre></div></div><div class="tab-pane" id="login_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>user</strong>: <em>required (object)</em><ul><li><strong>deviceid</strong>: <em>(string)</em></li><li><strong>email</strong>: <em>required (string)</em></li><li><strong>updatedAt</strong>: <em>required (number)</em></li><li><strong>allowNotifications</strong>: <em>(boolean)</em></li><li><strong>password</strong>: <em>(string)</em></li><li><strong>events</strong>: <em>required (array of )</em></li><li><strong>participations</strong>: <em>required (array of )</em></li><li><strong>username</strong>: <em>required (string)</em></li><li><strong>createdAt</strong>: <em>required (number)</em></li><li><strong>active</strong>: <em>required (boolean)</em></li><li><strong>id</strong>: <em>required (number)</em></li><li><strong>gender</strong>: <em>(one of male, female)</em></li><li><strong>userlevel</strong>: <em>required (one of 0, 1, 2, 3)</em></li><li><strong>YOB</strong>: <em>(integer)</em></li></ul></li><li><strong>token</strong>: <em>required (string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "user": {
+    "createdAt": 1508239367342,
+    "updatedAt": 1508239367342,
+    "id": 1,
+    "username": "admin",
+    "email": "xx@abcd.com",
+    "userlevel": 3,
+    "active": true,
+    "events": [],
+    "participations": []
+  },
+  "token": "ggnosn43nfgng"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em>required (string)</em></li><li><strong>message</strong>: <em>required (string)</em></li></ul><h2>HTTP status code <a href="http://httpstatus.es/401" target="_blank">401</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em>required (string)</em></li><li><strong>message</strong>: <em>required (string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "error": "error_201",
+  "message": "Invalid credentials"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="logout" class="panel-title">Logout endpoint</h3></div><div class="panel-body"><div class="top-resource-description"><p>Endpoint for logging out.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_logout"><span class="parent"></span>/logout</a> <span class="methods"><a href="#logout_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_logout" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#logout_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Log user out and destroy session information.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="logout_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/logout</h4></div><div class="modal-body"><div class="alert alert-info"><p>Log user out and destroy session information.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#logout_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="logout_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>message</strong>: <em>required (string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "message": "User logged out"
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em>required (string)</em></li><li><strong>message</strong>: <em>required (string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "error": "error_203",
+  "message": "User not logged in"
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="event" class="panel-title">Event endpoints</h3></div><div class="panel-body"><div class="top-resource-description"><p>Event endpoints</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_event"><span class="parent"></span>/event</a> <span class="methods"><a href="#event_post"><span class="badge badge_post">post</span></a> <a href="#event_get"><span class="badge badge_get">get</span></a></span></h4></div><div id="panel_event" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#event_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create new event</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#event_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="event_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/event</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create new event</p></div><ul class="nav nav-tabs"><li class="active"><a href="#event_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="event_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>cat</strong>: <em>required (string)</em></li><li><strong>polls</strong>: <em>(array of )</em></li><li><strong>long</strong>: <em>required (number)</em></li><li><strong>updatedAt</strong>: <em>required (integer)</em></li><li><strong>modifier</strong>: <em>(integer)</em></li><li><strong>creator</strong>: <em>(integer)</em></li><li><strong>desc</strong>: <em>required (string)</em></li><li><strong>place</strong>: <em>required (string)</em></li><li><strong>participants</strong>: <em>(array of )</em></li><li><strong>anonparticipants</strong>: <em>(array of )</em></li><li><strong>startDate</strong>: <em>required (integer)</em></li><li><strong>createdAt</strong>: <em>required (integer)</em></li><li><strong>title</strong>: <em>required (string)</em></li><li><strong>content_type</strong>: <em>required (one of event, announcements)</em></li><li><strong>amiparticipating</strong>: <em>required (boolean)</em></li><li><strong>endDate</strong>: <em>required (integer)</em></li><li><strong>status</strong>: <em>required (one of pending, published, removed)</em></li><li><strong>id</strong>: <em>required (integer)</em></li><li><strong>picture</strong>: <em>required (string)</em></li><li><strong>lat</strong>: <em>required (number)</em></li><li><strong>price</strong>: <em>required (string)</em></li><li><strong>organiser</strong>: <em>required (string)</em></li><li><strong>participantCount</strong>: <em>required (number)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "participants": [],
+  "polls": [],
+  "anonparticipants": [],
+  "createdAt": 1509548758543,
+  "updatedAt": 1510318162617,
+  "id": 6,
+  "title": "Antti Tuiskun konsertti",
+  "status": "pending",
+  "content_type": "event",
+  "desc": "Anatude kiertue.",
+  "price": "22",
+  "organiser": "Laurin oy",
+  "picture": "",
+  "cat": "musiikki",
+  "startDate": 1510430400000,
+  "endDate": 1510434000000,
+  "place": "Ratakatu 1, Oulu, Suomi",
+  "lat": 65.0102315,
+  "long": 25.4861322,
+  "creator": null,
+  "modifier": 1,
+  "amiparticipating": true,
+  "participantCount": 2
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em>required (string)</em></li><li><strong>message</strong>: <em>required (string)</em></li></ul></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="event_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/event</h4></div><div class="modal-body"><ul class="nav nav-tabs"><li class="active"><a href="#event_get_request" data-toggle="tab">Request</a></li><li><a href="#event_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="event_get_request"><h3>Query Parameters</h3><ul><li><strong>page</strong>: <em>(integer - default: 1)</em><p>Page number</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>2</code></pre></div></li><li><strong>limit</strong>: <em>(integer - default: 10)</em><p>Items on one page</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>20</code></pre></div></li><li><strong>search</strong>: <em>(string - default: )</em><p>Search string</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>luistelu</code></pre></div></li><li><strong>categories</strong>: <em>(string - default: )</em><p>Search events by category</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>Aikuiset</code></pre></div></li><li><strong>subcategories</strong>: <em>required (string)</em><p>Filter events by subcategories</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>ulkona, esteeton</code></pre></div></li><li><strong>from</strong>: <em>(integer)</em></li><li><strong>to</strong>: <em>(integer)</em></li><li><strong>status</strong>: <em>(string - default: published)</em></li><li><strong>listOld</strong>: <em>(boolean - default: false)</em><p>List expired events.</p></li></ul></div><div class="tab-pane" id="event_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: array of</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  {
+    "participants": [],
+    "polls": [],
+    "anonparticipants": [],
+    "createdAt": 1509365222450,
+    "updatedAt": 1509365222450,
+    "id": 1,
+    "title": "automyynti",
+    "status": "removed",
+    "content_type": "event",
+    "desc": "makkaraa",
+    "price": "",
+    "organiser": "",
+    "picture": "",
+    "cat": "Aikuiset",
+    "startDate": 1510704000000,
+    "endDate": 1510790400000,
+    "place": "",
+    "lat": 0,
+    "long": 0,
+    "creator": 6,
+    "modifier": null,
+    "amiparticipating": true,
+    "participantCount": 2
+  },
+  {
+    "participants": [],
+    "polls": [],
+    "anonparticipants": [],
+    "createdAt": 1509367025529,
+    "updatedAt": 1509534242614,
+    "id": 2,
+    "title": "wuuu",
+    "status": "published",
+    "content_type": "event",
+    "desc": "nakki",
+    "price": "",
+    "organiser": "",
+    "picture": "",
+    "cat": "Aikuiset",
+    "startDate": 1510704000000,
+    "endDate": 1510790400000,
+    "place": "",
+    "lat": 0,
+    "long": 0,
+    "creator": 6,
+    "modifier": null,
+    "amiparticipating": true,
+    "participantCount": 2
+  }
+]</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em>required (string)</em></li><li><strong>message</strong>: <em>required (string)</em></li></ul></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_event__id_"><span class="parent">/event</span>/[id]</a> <span class="methods"><a href="#event__id__get"><span class="badge badge_get">get</span></a> <a href="#event__id__post"><span class="badge badge_post">post</span></a> <a href="#event__id__delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_event__id_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#event__id__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get single event</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#event__id__post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Update single event information</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#event__id__delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>Mark event status as removed</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="event__id__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/event</span>/[id]</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get single event</p></div><ul class="nav nav-tabs"><li class="active"><a href="#event__id__get_request" data-toggle="tab">Request</a></li><li><a href="#event__id__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="event__id__get_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="event__id__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>cat</strong>: <em>required (string)</em></li><li><strong>polls</strong>: <em>(array of )</em></li><li><strong>long</strong>: <em>required (number)</em></li><li><strong>updatedAt</strong>: <em>required (integer)</em></li><li><strong>modifier</strong>: <em>(integer)</em></li><li><strong>creator</strong>: <em>(integer)</em></li><li><strong>desc</strong>: <em>required (string)</em></li><li><strong>place</strong>: <em>required (string)</em></li><li><strong>participants</strong>: <em>(array of )</em></li><li><strong>anonparticipants</strong>: <em>(array of )</em></li><li><strong>startDate</strong>: <em>required (integer)</em></li><li><strong>createdAt</strong>: <em>required (integer)</em></li><li><strong>title</strong>: <em>required (string)</em></li><li><strong>content_type</strong>: <em>required (one of event, announcements)</em></li><li><strong>amiparticipating</strong>: <em>required (boolean)</em></li><li><strong>endDate</strong>: <em>required (integer)</em></li><li><strong>status</strong>: <em>required (one of pending, published, removed)</em></li><li><strong>id</strong>: <em>required (integer)</em></li><li><strong>picture</strong>: <em>required (string)</em></li><li><strong>lat</strong>: <em>required (number)</em></li><li><strong>price</strong>: <em>required (string)</em></li><li><strong>organiser</strong>: <em>required (string)</em></li><li><strong>participantCount</strong>: <em>required (number)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "participants": [],
+  "polls": [],
+  "anonparticipants": [],
+  "createdAt": 1509548758543,
+  "updatedAt": 1510318162617,
+  "id": 6,
+  "title": "Antti Tuiskun konsertti",
+  "status": "pending",
+  "content_type": "event",
+  "desc": "Anatude kiertue.",
+  "price": "22",
+  "organiser": "Laurin oy",
+  "picture": "",
+  "cat": "musiikki",
+  "startDate": 1510430400000,
+  "endDate": 1510434000000,
+  "place": "Ratakatu 1, Oulu, Suomi",
+  "lat": 65.0102315,
+  "long": 25.4861322,
+  "creator": null,
+  "modifier": 1,
+  "amiparticipating": true,
+  "participantCount": 2
+}</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="event__id__post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/event</span>/[id]</h4></div><div class="modal-body"><div class="alert alert-info"><p>Update single event information</p></div><ul class="nav nav-tabs"><li class="active"><a href="#event__id__post_request" data-toggle="tab">Request</a></li><li><a href="#event__id__post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="event__id__post_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="event__id__post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>cat</strong>: <em>required (string)</em></li><li><strong>polls</strong>: <em>(array of )</em></li><li><strong>long</strong>: <em>required (number)</em></li><li><strong>updatedAt</strong>: <em>required (integer)</em></li><li><strong>modifier</strong>: <em>(integer)</em></li><li><strong>creator</strong>: <em>(integer)</em></li><li><strong>desc</strong>: <em>required (string)</em></li><li><strong>place</strong>: <em>required (string)</em></li><li><strong>participants</strong>: <em>(array of )</em></li><li><strong>anonparticipants</strong>: <em>(array of )</em></li><li><strong>startDate</strong>: <em>required (integer)</em></li><li><strong>createdAt</strong>: <em>required (integer)</em></li><li><strong>title</strong>: <em>required (string)</em></li><li><strong>content_type</strong>: <em>required (one of event, announcements)</em></li><li><strong>amiparticipating</strong>: <em>required (boolean)</em></li><li><strong>endDate</strong>: <em>required (integer)</em></li><li><strong>status</strong>: <em>required (one of pending, published, removed)</em></li><li><strong>id</strong>: <em>required (integer)</em></li><li><strong>picture</strong>: <em>required (string)</em></li><li><strong>lat</strong>: <em>required (number)</em></li><li><strong>price</strong>: <em>required (string)</em></li><li><strong>organiser</strong>: <em>required (string)</em></li><li><strong>participantCount</strong>: <em>required (number)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "participants": [],
+  "polls": [],
+  "anonparticipants": [],
+  "createdAt": 1509548758543,
+  "updatedAt": 1510318162617,
+  "id": 6,
+  "title": "Antti Tuiskun konsertti",
+  "status": "pending",
+  "content_type": "event",
+  "desc": "Anatude kiertue.",
+  "price": "22",
+  "organiser": "Laurin oy",
+  "picture": "",
+  "cat": "musiikki",
+  "startDate": 1510430400000,
+  "endDate": 1510434000000,
+  "place": "Ratakatu 1, Oulu, Suomi",
+  "lat": 65.0102315,
+  "long": 25.4861322,
+  "creator": null,
+  "modifier": 1,
+  "amiparticipating": true,
+  "participantCount": 2
+}</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="event__id__delete"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/event</span>/[id]</h4></div><div class="modal-body"><div class="alert alert-info"><p>Mark event status as removed</p></div><ul class="nav nav-tabs"><li class="active"><a href="#event__id__delete_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="event__id__delete_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_event__id__participate"><span class="parent">/event/[id]</span>/participate</a> <span class="methods"><a href="#event__id__participate_post"><span class="badge badge_post">post</span></a> <a href="#event__id__participate_delete"><span class="badge badge_delete">delete</span></a></span></h4></div><div id="panel_event__id__participate" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#event__id__participate_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Mark user as event participant.</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#event__id__participate_delete'" class="list-group-item"><span class="badge badge_delete">delete</span><div class="method_description"><p>Unmark user as event participant.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="event__id__participate_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/event/[id]</span>/participate</h4></div><div class="modal-body"><div class="alert alert-info"><p>Mark user as event participant.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#event__id__participate_post_request" data-toggle="tab">Request</a></li><li><a href="#event__id__participate_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="event__id__participate_post_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="event__id__participate_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>cat</strong>: <em>required (string)</em></li><li><strong>polls</strong>: <em>(array of )</em></li><li><strong>long</strong>: <em>required (number)</em></li><li><strong>updatedAt</strong>: <em>required (integer)</em></li><li><strong>modifier</strong>: <em>(integer)</em></li><li><strong>creator</strong>: <em>(integer)</em></li><li><strong>desc</strong>: <em>required (string)</em></li><li><strong>place</strong>: <em>required (string)</em></li><li><strong>participants</strong>: <em>(array of )</em></li><li><strong>anonparticipants</strong>: <em>(array of )</em></li><li><strong>startDate</strong>: <em>required (integer)</em></li><li><strong>createdAt</strong>: <em>required (integer)</em></li><li><strong>title</strong>: <em>required (string)</em></li><li><strong>content_type</strong>: <em>required (one of event, announcements)</em></li><li><strong>amiparticipating</strong>: <em>required (boolean)</em></li><li><strong>endDate</strong>: <em>required (integer)</em></li><li><strong>status</strong>: <em>required (one of pending, published, removed)</em></li><li><strong>id</strong>: <em>required (integer)</em></li><li><strong>picture</strong>: <em>required (string)</em></li><li><strong>lat</strong>: <em>required (number)</em></li><li><strong>price</strong>: <em>required (string)</em></li><li><strong>organiser</strong>: <em>required (string)</em></li><li><strong>participantCount</strong>: <em>required (number)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "participants": [],
+  "polls": [],
+  "anonparticipants": [],
+  "createdAt": 1509548758543,
+  "updatedAt": 1510318162617,
+  "id": 6,
+  "title": "Antti Tuiskun konsertti",
+  "status": "pending",
+  "content_type": "event",
+  "desc": "Anatude kiertue.",
+  "price": "22",
+  "organiser": "Laurin oy",
+  "picture": "",
+  "cat": "musiikki",
+  "startDate": 1510430400000,
+  "endDate": 1510434000000,
+  "place": "Ratakatu 1, Oulu, Suomi",
+  "lat": 65.0102315,
+  "long": 25.4861322,
+  "creator": null,
+  "modifier": 1,
+  "amiparticipating": true,
+  "participantCount": 2
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em>required (string)</em></li><li><strong>message</strong>: <em>required (string)</em></li></ul></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="event__id__participate_delete"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_delete">delete</span> <span class="parent">/event/[id]</span>/participate</h4></div><div class="modal-body"><div class="alert alert-info"><p>Unmark user as event participant.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#event__id__participate_delete_request" data-toggle="tab">Request</a></li><li><a href="#event__id__participate_delete_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="event__id__participate_delete_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em></li></ul></div><div class="tab-pane" id="event__id__participate_delete_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>cat</strong>: <em>required (string)</em></li><li><strong>polls</strong>: <em>(array of )</em></li><li><strong>long</strong>: <em>required (number)</em></li><li><strong>updatedAt</strong>: <em>required (integer)</em></li><li><strong>modifier</strong>: <em>(integer)</em></li><li><strong>creator</strong>: <em>(integer)</em></li><li><strong>desc</strong>: <em>required (string)</em></li><li><strong>place</strong>: <em>required (string)</em></li><li><strong>participants</strong>: <em>(array of )</em></li><li><strong>anonparticipants</strong>: <em>(array of )</em></li><li><strong>startDate</strong>: <em>required (integer)</em></li><li><strong>createdAt</strong>: <em>required (integer)</em></li><li><strong>title</strong>: <em>required (string)</em></li><li><strong>content_type</strong>: <em>required (one of event, announcements)</em></li><li><strong>amiparticipating</strong>: <em>required (boolean)</em></li><li><strong>endDate</strong>: <em>required (integer)</em></li><li><strong>status</strong>: <em>required (one of pending, published, removed)</em></li><li><strong>id</strong>: <em>required (integer)</em></li><li><strong>picture</strong>: <em>required (string)</em></li><li><strong>lat</strong>: <em>required (number)</em></li><li><strong>price</strong>: <em>required (string)</em></li><li><strong>organiser</strong>: <em>required (string)</em></li><li><strong>participantCount</strong>: <em>required (number)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "participants": [],
+  "polls": [],
+  "anonparticipants": [],
+  "createdAt": 1509548758543,
+  "updatedAt": 1510318162617,
+  "id": 6,
+  "title": "Antti Tuiskun konsertti",
+  "status": "pending",
+  "content_type": "event",
+  "desc": "Anatude kiertue.",
+  "price": "22",
+  "organiser": "Laurin oy",
+  "picture": "",
+  "cat": "musiikki",
+  "startDate": 1510430400000,
+  "endDate": 1510434000000,
+  "place": "Ratakatu 1, Oulu, Suomi",
+  "lat": 65.0102315,
+  "long": 25.4861322,
+  "creator": null,
+  "modifier": 1,
+  "amiparticipating": true,
+  "participantCount": 2
+}</code></pre></div><h2>HTTP status code <a href="http://httpstatus.es/400" target="_blank">400</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>error</strong>: <em>required (string)</em></li><li><strong>message</strong>: <em>required (string)</em></li></ul></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="voting" class="panel-title">Vote endpoints</h3></div><div class="panel-body"><div class="top-resource-description"><p>Endpoints for poll management</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_voting"><span class="parent"></span>/voting</a> <span class="methods"><a href="#voting_get"><span class="badge badge_get">get</span></a> <a href="#voting_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_voting" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#voting_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get list of votes.</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#voting_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create new votepoll</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="voting_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/voting</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get list of votes.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#voting_get_request" data-toggle="tab">Request</a></li><li><a href="#voting_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="voting_get_request"><h3>Query Parameters</h3><ul><li><strong>listAll</strong>: <em>(boolean)</em><p>List all votes regardless of status</p></li></ul></div><div class="tab-pane" id="voting_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: array of</p></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="voting_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/voting</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create new votepoll</p></div><ul class="nav nav-tabs"><li class="active"><a href="#voting_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="voting_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_voting__id_"><span class="parent">/voting</span>/[id]</a> <span class="methods"><a href="#voting__id__get"><span class="badge badge_get">get</span></a> <a href="#voting__id__post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_voting__id_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#voting__id__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get single vote object.</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#voting__id__post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Update single vote object</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="voting__id__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/voting</span>/[id]</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get single vote object.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#voting__id__get_request" data-toggle="tab">Request</a></li><li><a href="#voting__id__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="voting__id__get_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em><p>Vote id</p></li></ul></div><div class="tab-pane" id="voting__id__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>pollType</strong>: <em>required (one of poll, questionnaire)</em></li><li><strong>updatedAt</strong>: <em>required (number)</em></li><li><strong>linkedEvent</strong>: <em>required (number)</em></li><li><strong>createdAt</strong>: <em>required (number)</em></li><li><strong>title</strong>: <em>required (string)</em></li><li><strong>poll</strong>: <em>required (array of )</em></li><li><strong>link</strong>: <em>required (string)</em></li><li><strong>active</strong>: <em>required (boolean)</em></li><li><strong>id</strong>: <em>required (number)</em></li><li><strong>image</strong>: <em>required (string)</em></li><li><strong>organiser</strong>: <em>required (string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "createdAt": 1513170622311,
+  "updatedAt": 1513270411517,
+  "id": 1,
+  "title": "Laurin testiäänestys",
+  "organiser": "Geniem oy",
+  "link": "",
+  "image": "",
+  "active": true,
+  "pollType": "poll",
+  "linkedEvent": 3,
+  "poll": [
+    {
+      "type": "bool",
+      "id": "41ad2632-3e5e-442c-828a-65d90147632c",
+      "data": {
+        "trueText": "Kyllä",
+        "falseText": "Ei"
+      },
+      "title": "Onko jouluna lunta?"
+    }
+  ]
+}</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="voting__id__post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/voting</span>/[id]</h4></div><div class="modal-body"><div class="alert alert-info"><p>Update single vote object</p></div><ul class="nav nav-tabs"><li class="active"><a href="#voting__id__post_request" data-toggle="tab">Request</a></li><li><a href="#voting__id__post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="voting__id__post_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em><p>Vote id</p></li></ul></div><div class="tab-pane" id="voting__id__post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>pollType</strong>: <em>required (one of poll, questionnaire)</em></li><li><strong>updatedAt</strong>: <em>required (number)</em></li><li><strong>linkedEvent</strong>: <em>required (number)</em></li><li><strong>createdAt</strong>: <em>required (number)</em></li><li><strong>title</strong>: <em>required (string)</em></li><li><strong>poll</strong>: <em>required (array of )</em></li><li><strong>link</strong>: <em>required (string)</em></li><li><strong>active</strong>: <em>required (boolean)</em></li><li><strong>id</strong>: <em>required (number)</em></li><li><strong>image</strong>: <em>required (string)</em></li><li><strong>organiser</strong>: <em>required (string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "createdAt": 1513170622311,
+  "updatedAt": 1513270411517,
+  "id": 1,
+  "title": "Laurin testiäänestys",
+  "organiser": "Geniem oy",
+  "link": "",
+  "image": "",
+  "active": true,
+  "pollType": "poll",
+  "linkedEvent": 3,
+  "poll": [
+    {
+      "type": "bool",
+      "id": "41ad2632-3e5e-442c-828a-65d90147632c",
+      "data": {
+        "trueText": "Kyllä",
+        "falseText": "Ei"
+      },
+      "title": "Onko jouluna lunta?"
+    }
+  ]
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="votingresult__id_" class="panel-title">Vote result endpoints</h3></div><div class="panel-body"><div class="top-resource-description"><p>Endpoints for creating new filled poll and fetching results.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_votingresult__id_"><span class="parent"></span>/votingresult/[id]</a> <span class="methods"><a href="#votingresult__id__get"><span class="badge badge_get">get</span></a> <a href="#votingresult__id__post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_votingresult__id_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#votingresult__id__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get results for single poll</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#votingresult__id__post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Send filledpoll to backend.</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="votingresult__id__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/votingresult/[id]</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get results for single poll</p></div><ul class="nav nav-tabs"><li class="active"><a href="#votingresult__id__get_request" data-toggle="tab">Request</a></li><li><a href="#votingresult__id__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="votingresult__id__get_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em><p>Vote id</p></li></ul></div><div class="tab-pane" id="votingresult__id__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>totalCount</strong>: <em>required (number)</em></li><li><strong>title</strong>: <em>required (string)</em></li><li><strong>questions</strong>: <em>required (array of )</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "totalCount": 5,
+  "title": "ff",
+  "questions": [
+    {
+      "type": "bool",
+      "id": "6ad0ad88-45dc-42b6-8afd-074be24bc1f7",
+      "data": {
+        "trueText": "Kyllä",
+        "falseText": "Ei"
+      },
+      "title": "Onko huomenna pouta?",
+      "trueCount": 2,
+      "falseCount": 3
+    },
+    {
+      "type": "checkbox",
+      "id": "6362eba8-3fb6-4695-bb14-dd693abeac3e",
+      "data": {
+        "value1": "Kissa",
+        "value2": "Koira",
+        "value3": "",
+        "value4": "",
+        "value5": "",
+        "value6": ""
+      },
+      "title": "Lempi eläin",
+      "valueCounts": {
+        "value1": 1,
+        "value2": 4
+      }
+    }
+  ]
+}</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="votingresult__id__post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/votingresult/[id]</h4></div><div class="modal-body"><div class="alert alert-info"><p>Send filledpoll to backend.</p></div><ul class="nav nav-tabs"><li class="active"><a href="#votingresult__id__post_request" data-toggle="tab">Request</a></li></ul><div class="tab-content"><div class="tab-pane active" id="votingresult__id__post_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em><p>Vote id</p></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>createdAt</strong>: <em>required (number)</em></li><li><strong>updatedAt</strong>: <em>required (number)</em></li><li><strong>id</strong>: <em>required (number)</em></li><li><strong>title</strong>: <em>required (string)</em></li><li><strong>link</strong>: <em>required (string)</em></li><li><strong>image</strong>: <em>required (string)</em></li><li><strong>active</strong>: <em>required (boolean)</em></li><li><strong>poll</strong>: <em>required (array of )</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "createdAt": 1513170622311,
+  "updatedAt": 1513270411517,
+  "id": 1,
+  "title": "Laurin testiäänestys",
+  "link": "",
+  "image": "",
+  "active": true,
+  "poll": [
+    {
+      "type": "bool",
+      "id": "41ad2632-3e5e-442c-828a-65d90147632c",
+      "data": {
+        "trueText": "Kyllä",
+        "falseText": "Ei"
+      },
+      "title": "Onko jouluna lunta?",
+      "value": true
+    }
+  ]
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div><div class="panel panel-default"><div class="panel-heading"><h3 id="ad" class="panel-title">Vote endpoints</h3></div><div class="panel-body"><div class="top-resource-description"><p>Endpoints for ad management.</p></div><div class="panel-group"><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_ad"><span class="parent"></span>/ad</a> <span class="methods"><a href="#ad_get"><span class="badge badge_get">get</span></a> <a href="#ad_post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_ad" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#ad_get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get list of ads</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#ad_post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Create new ad</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="ad_get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent"></span>/ad</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get list of ads</p></div><ul class="nav nav-tabs"><li class="active"><a href="#ad_get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="ad_get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: array of</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>[
+  {
+    "createdAt": 1510925218393,
+    "updatedAt": 1515573585290,
+    "id": 1,
+    "title": "Osta hienot housut",
+    "desc": "",
+    "picture": "https://oulu-app-stage.s3-eu-west-1.amazonaws.com/images/0451346e-d49a-4814-bd5a-44af5137207b.jpeg",
+    "advertiser": "Lauri",
+    "publishDate": 1511011560000,
+    "expireDate": 1512048360000,
+    "showDates": false,
+    "link": "",
+    "cat": "",
+    "adtype": "sponsored",
+    "creator": 1,
+    "modifier": 1
+  },
+  {
+    "createdAt": 1510925218393,
+    "updatedAt": 1515573585290,
+    "id": 2,
+    "title": "Osta tämä paita",
+    "desc": "",
+    "picture": "https://oulu-app-stage.s3-eu-west-1.amazonaws.com/images/0451346e-d49a-4814-bd5a-44af5137207b.jpeg",
+    "advertiser": "Lauri",
+    "publishDate": 1511011560000,
+    "expireDate": 1512048360000,
+    "showDates": false,
+    "link": "",
+    "cat": "",
+    "adtype": "sponsored",
+    "creator": 1,
+    "modifier": 1
+  }
+]</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="ad_post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent"></span>/ad</h4></div><div class="modal-body"><div class="alert alert-info"><p>Create new ad</p></div><ul class="nav nav-tabs"><li class="active"><a href="#ad_post_request" data-toggle="tab">Request</a></li><li><a href="#ad_post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="ad_post_request"><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>cat</strong>: <em>required (string)</em></li><li><strong>updatedAt</strong>: <em>required (number)</em></li><li><strong>modifier</strong>: <em>required (number)</em></li><li><strong>creator</strong>: <em>required (number)</em></li><li><strong>desc</strong>: <em>required (string)</em></li><li><strong>advertiser</strong>: <em>required (string)</em></li><li><strong>createdAt</strong>: <em>required (number)</em></li><li><strong>showDates</strong>: <em>required (boolean)</em></li><li><strong>publishDate</strong>: <em>required (number)</em></li><li><strong>expireDate</strong>: <em>required (number)</em></li><li><strong>title</strong>: <em>required (string)</em></li><li><strong>adtype</strong>: <em>required (one of sponsored, announcement - default: sponsored)</em></li><li><strong>link</strong>: <em>required (string)</em></li><li><strong>id</strong>: <em>required (number)</em></li><li><strong>picture</strong>: <em>required (string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "createdAt": 1510925218393,
+  "updatedAt": 1515573585290,
+  "id": 1,
+  "title": "Osta hieno lambo.2",
+  "desc": "",
+  "picture": "https://oulu-app-stage.s3-eu-west-1.amazonaws.com/images/0451346e-d49a-4814-bd5a-44af5137207b.jpeg",
+  "advertiser": "Lauri",
+  "publishDate": 1511011560000,
+  "expireDate": 1512048360000,
+  "showDates": false,
+  "link": "",
+  "cat": "",
+  "adtype": "sponsored",
+  "creator": 1,
+  "modifier": 1
+}</code></pre></div></div><div class="tab-pane" id="ad_post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>cat</strong>: <em>required (string)</em></li><li><strong>updatedAt</strong>: <em>required (number)</em></li><li><strong>modifier</strong>: <em>required (number)</em></li><li><strong>creator</strong>: <em>required (number)</em></li><li><strong>desc</strong>: <em>required (string)</em></li><li><strong>advertiser</strong>: <em>required (string)</em></li><li><strong>createdAt</strong>: <em>required (number)</em></li><li><strong>showDates</strong>: <em>required (boolean)</em></li><li><strong>publishDate</strong>: <em>required (number)</em></li><li><strong>expireDate</strong>: <em>required (number)</em></li><li><strong>title</strong>: <em>required (string)</em></li><li><strong>adtype</strong>: <em>required (one of sponsored, announcement - default: sponsored)</em></li><li><strong>link</strong>: <em>required (string)</em></li><li><strong>id</strong>: <em>required (number)</em></li><li><strong>picture</strong>: <em>required (string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "createdAt": 1510925218393,
+  "updatedAt": 1515573585290,
+  "id": 1,
+  "title": "Osta hieno lambo.2",
+  "desc": "",
+  "picture": "https://oulu-app-stage.s3-eu-west-1.amazonaws.com/images/0451346e-d49a-4814-bd5a-44af5137207b.jpeg",
+  "advertiser": "Lauri",
+  "publishDate": 1511011560000,
+  "expireDate": 1512048360000,
+  "showDates": false,
+  "link": "",
+  "cat": "",
+  "adtype": "sponsored",
+  "creator": 1,
+  "modifier": 1
+}</code></pre></div></div></div></div></div></div></div></div><div class="panel panel-white resource-modal"><div class="panel-heading"><h4 class="panel-title"><a class="collapsed" data-toggle="collapse" href="#panel_ad__id_"><span class="parent">/ad</span>/[id]</a> <span class="methods"><a href="#ad__id__get"><span class="badge badge_get">get</span></a> <a href="#ad__id__post"><span class="badge badge_post">post</span></a></span></h4></div><div id="panel_ad__id_" class="panel-collapse collapse"><div class="panel-body"><div class="list-group"><div onclick="window.location.href = '#ad__id__get'" class="list-group-item"><span class="badge badge_get">get</span><div class="method_description"><p>Get single ad</p></div><div class="clearfix"></div></div><div onclick="window.location.href = '#ad__id__post'" class="list-group-item"><span class="badge badge_post">post</span><div class="method_description"><p>Update ad information</p></div><div class="clearfix"></div></div></div></div></div><div class="modal fade" tabindex="0" id="ad__id__get"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_get">get</span> <span class="parent">/ad</span>/[id]</h4></div><div class="modal-body"><div class="alert alert-info"><p>Get single ad</p></div><ul class="nav nav-tabs"><li class="active"><a href="#ad__id__get_request" data-toggle="tab">Request</a></li><li><a href="#ad__id__get_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="ad__id__get_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em><p>Ad id</p></li></ul></div><div class="tab-pane" id="ad__id__get_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>cat</strong>: <em>required (string)</em></li><li><strong>updatedAt</strong>: <em>required (number)</em></li><li><strong>modifier</strong>: <em>required (number)</em></li><li><strong>creator</strong>: <em>required (number)</em></li><li><strong>desc</strong>: <em>required (string)</em></li><li><strong>advertiser</strong>: <em>required (string)</em></li><li><strong>createdAt</strong>: <em>required (number)</em></li><li><strong>showDates</strong>: <em>required (boolean)</em></li><li><strong>publishDate</strong>: <em>required (number)</em></li><li><strong>expireDate</strong>: <em>required (number)</em></li><li><strong>title</strong>: <em>required (string)</em></li><li><strong>adtype</strong>: <em>required (one of sponsored, announcement - default: sponsored)</em></li><li><strong>link</strong>: <em>required (string)</em></li><li><strong>id</strong>: <em>required (number)</em></li><li><strong>picture</strong>: <em>required (string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "createdAt": 1510925218393,
+  "updatedAt": 1515573585290,
+  "id": 1,
+  "title": "Osta hieno lambo.2",
+  "desc": "",
+  "picture": "https://oulu-app-stage.s3-eu-west-1.amazonaws.com/images/0451346e-d49a-4814-bd5a-44af5137207b.jpeg",
+  "advertiser": "Lauri",
+  "publishDate": 1511011560000,
+  "expireDate": 1512048360000,
+  "showDates": false,
+  "link": "",
+  "cat": "",
+  "adtype": "sponsored",
+  "creator": 1,
+  "modifier": 1
+}</code></pre></div></div></div></div></div></div></div><div class="modal fade" tabindex="0" id="ad__id__post"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h4 class="modal-title" id="myModalLabel"><span class="badge badge_post">post</span> <span class="parent">/ad</span>/[id]</h4></div><div class="modal-body"><div class="alert alert-info"><p>Update ad information</p></div><ul class="nav nav-tabs"><li class="active"><a href="#ad__id__post_request" data-toggle="tab">Request</a></li><li><a href="#ad__id__post_response" data-toggle="tab">Response</a></li></ul><div class="tab-content"><div class="tab-pane active" id="ad__id__post_request"><h3>URI Parameters</h3><ul><li><strong>id</strong>: <em>required (string)</em><p>Ad id</p></li></ul><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "title": "uusi otsikko"
+}</code></pre></div></div><div class="tab-pane" id="ad__id__post_response"><h2>HTTP status code <a href="http://httpstatus.es/200" target="_blank">200</a></h2><h3>Body</h3><p><strong>Media type</strong>: application/json</p><p><strong>Type</strong>: object</p><strong>Properties</strong><ul><li><strong>cat</strong>: <em>required (string)</em></li><li><strong>updatedAt</strong>: <em>required (number)</em></li><li><strong>modifier</strong>: <em>required (number)</em></li><li><strong>creator</strong>: <em>required (number)</em></li><li><strong>desc</strong>: <em>required (string)</em></li><li><strong>advertiser</strong>: <em>required (string)</em></li><li><strong>createdAt</strong>: <em>required (number)</em></li><li><strong>showDates</strong>: <em>required (boolean)</em></li><li><strong>publishDate</strong>: <em>required (number)</em></li><li><strong>expireDate</strong>: <em>required (number)</em></li><li><strong>title</strong>: <em>required (string)</em></li><li><strong>adtype</strong>: <em>required (one of sponsored, announcement - default: sponsored)</em></li><li><strong>link</strong>: <em>required (string)</em></li><li><strong>id</strong>: <em>required (number)</em></li><li><strong>picture</strong>: <em>required (string)</em></li></ul><p><strong>Example</strong>:</p><div class="examples"><pre><code>{
+  "createdAt": 1510925218393,
+  "updatedAt": 1515573585290,
+  "id": 1,
+  "title": "Osta hieno lambo.2",
+  "desc": "",
+  "picture": "https://oulu-app-stage.s3-eu-west-1.amazonaws.com/images/0451346e-d49a-4814-bd5a-44af5137207b.jpeg",
+  "advertiser": "Lauri",
+  "publishDate": 1511011560000,
+  "expireDate": 1512048360000,
+  "showDates": false,
+  "link": "",
+  "cat": "",
+  "adtype": "sponsored",
+  "creator": 1,
+  "modifier": 1
+}</code></pre></div></div></div></div></div></div></div></div></div></div></div></div><div class="col-md-3"><div id="sidebar" class="hidden-print affix" role="complementary"><ul class="nav nav-pills nav-stacked"><li><a href="#user">User endpoints</a></li><li><a href="#me">User information endpoint</a></li><li><a href="#anonuser">Anonymous users endpoint</a></li><li><a href="#login">Login endpoint</a></li><li><a href="#logout">Logout endpoint</a></li><li><a href="#event">Event endpoints</a></li><li><a href="#voting">Vote endpoints</a></li><li><a href="#votingresult__id_">Vote result endpoints</a></li><li><a href="#ad">Vote endpoints</a></li></ul></div></div></div></div></body></html>

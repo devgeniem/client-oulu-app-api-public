@@ -1,0 +1,32 @@
+{
+  "extends": "airbnb",
+  "parser": "babel-eslint",
+  "env": {
+      "browser": true,
+      "node": true
+  },
+  "rules": {
+    "react/jsx-key": 2,
+    "indent": [1, 2],
+    "max-len": [1, 150],
+    "react/jsx-filename-extension": 0,
+    "react/prefer-stateless-function": 0,
+    "react/prop-types": 0,
+    "import/prefer-default-export": 0,
+    "import/no-named-as-default-member": 0,
+    "arrow-body-style": 0,
+    "no-plusplus": [2, { "allowForLoopAfterthoughts": true }]
+  },
+  "globals": {
+    "_": true,
+    "sails": true,
+    "UserService": true,
+    "TokenService": true,
+    "User": true,
+    "AnonUser": true,
+    "Advertisement": true,
+    "VotingResult": true,
+    "Device": true,
+    "Voting": true
+  }
+}

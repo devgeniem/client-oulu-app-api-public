@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{title}</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=[GOOGLE_API_KEY]&libraries=places"></script>
+  </head>
+
+  <body>
+    {+content/}
+  </body>
+</html>

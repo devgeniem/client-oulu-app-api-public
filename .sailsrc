@@ -1,0 +1,6 @@
+{
+  "hookTimeout": 80000,
+  "generators": {
+    "modules": {}
+  }
+}
