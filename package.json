@@ -30,7 +30,7 @@
     "extract-text-webpack-plugin": "^2.1.0",
     "i18next": "^8.4.3",
     "iso": "^5.2.0",
-    "jsonwebtoken": "^7.3.0",
+    "jsonwebtoken": "^9.0.0",
     "knox": "^0.9.2",
     "lodash": "^4.17.4",
     "moment": "^2.19.1",
